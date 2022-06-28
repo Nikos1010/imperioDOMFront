@@ -30,7 +30,7 @@
     </div>
     <label>Sabores</label><br>
     <div *ngFor="let sabor of saboresList">
-        <input (click)="agregarSabor(sabor)" [checked]="check" type="checkbox" [value]="sabor"> <label class="ml-3" [id]="sabor">{{ sabor }}</label>
+        <input (click)="agregarSabor(sabor)" [checked]="verificarSabor(sabor)" type="checkbox" [value]="sabor"> <label class="ml-3" [class.check]="verificarSabor(sabor)" [id]="sabor">{{ sabor }}</label>
     </div>
     <textarea class="controls" cols="29" rows="5" formControlName="descripcion" placeholder="Ingrese una descripcion"></textarea>
     <div class="text-danger"

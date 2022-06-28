@@ -15,9 +15,8 @@ export class CrearProductoComponent implements OnInit {
   productoForm: FormGroup;
   titulo: string = 'CREAR PRODUCTO';
   id: string | null;
-  saborGuardado: string[] =[];
-  check: boolean = false;
   saboresList: string[] = Object.values(Sabores);
+  saborGuardado: string[] = [];
 
   constructor( private fb: FormBuilder,
                private router: Router,
@@ -34,7 +33,10 @@ export class CrearProductoComponent implements OnInit {
       descripcion: ['', Validators.required],
       instrucciones: ['', Validators.required]
     });
-    this.id = this.aRouter.snapshot.paramMap.get('prodId')
+    this.id = this.aRouter.snapshot.paramMap.get('prodId');
+    this._productoService.getProductFlavor.subscribe(data => {
+      this.saborGuardado = data;
+    });
    }
 
   ngOnInit(): void {
@@ -51,20 +53,15 @@ export class CrearProductoComponent implements OnInit {
       element.style.color = "#68F401";
       this.saborGuardado.push(sabor);
     }
-    console.log(this.saborGuardado);
   }
 
-  checkearSabores(saborDB: string) {
-    for (const sabor of this.saboresList) {
-        if(saborDB.includes(sabor)){
-          this.agregarSabor(sabor);
-          this.check = true;
-        } else {
-          this.check = false;
-        }
+  verificarSabor(sabor: string): boolean {
+    if(this.saborGuardado.includes(sabor)){
+      return true;
+    } else {
+      return false;
     }
   }
-
 
   agregarProducto(){
     const PRODUCTO: Producto = {
@@ -78,8 +75,6 @@ export class CrearProductoComponent implements OnInit {
       precio: this.productoForm.get('precio')?.value,
       sabores: this.saborGuardado
     }
-    console.log(this.saborGuardado);
-    console.log(PRODUCTO);
     
     if(this.id !== null){
       this._productoService.editarProducto(this.id, PRODUCTO).subscribe(data => {
@@ -103,7 +98,7 @@ export class CrearProductoComponent implements OnInit {
     if(this.id !== null){
       this.titulo = 'Editar Producto';
       this._productoService.obtenerProducto(this.id).subscribe(data => {
-        this.checkearSabores(data.sabores);
+        this._productoService.almacenarSabores(data.sabores);
         this.productoForm.setValue({
           nombre: data.nombre,
           imagen: data.imagen,

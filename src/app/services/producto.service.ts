@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Producto, ProductoDB } from '../interfaces/producto.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 const { urlConnectionAPI } = environment; 
@@ -14,7 +14,8 @@ export class ProductoService {
 
   cargando: boolean = true;
   productos: ProductoDB[] = [];
-  productosFiltrado: ProductoDB[] = []
+  productosFiltrado: ProductoDB[] = [];
+  getProductFlavor: BehaviorSubject<string[]> = new BehaviorSubject(['']);
 
   constructor( private http: HttpClient ) { }
 
@@ -38,6 +39,10 @@ export class ProductoService {
     return this.http.put(`${urlConnectionAPI}user/editProduct/${prodId}`, product);
    }
 
+  almacenarSabores(sabor: string[]) {
+    this.getProductFlavor.next(sabor);
+  }
+  
   obtenerProductos() {
     return new Promise <void> ((resolve, reject)=>{
       this.cargarProducto()
