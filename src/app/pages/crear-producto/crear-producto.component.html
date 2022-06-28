@@ -1,0 +1,48 @@
+<form class="form-register" [formGroup]="productoForm" (ngSubmit)="agregarProducto()">
+    <h4 class="titulo text-center">{{ titulo | uppercase }}</h4>
+    <input class="controls" type="text" formControlName="nombre" placeholder="Ingrese nombre del producto">
+    <div class="text-danger" *ngIf="productoForm.get('nombre')?.hasError('required') && productoForm.get('nombre')?.touched">
+        <span>El nombre del producto es <strong>obligatorio</strong></span>
+    </div>
+    <input class="controls" type="text" formControlName="imagen" placeholder="Ingrese nombre de la imagen">
+    <div class="text-danger" *ngIf="productoForm.get('imagen')?.hasError('required') && productoForm.get('imagen')?.touched">
+        <span>El nombre de la imagen es <strong>obligatorio</strong></span>
+    </div>
+    <input class="controls" type="text" formControlName="categoria" placeholder="Ingrese la categoria">
+    <div class="text-danger"
+        *ngIf="productoForm.get('categoria')?.hasError('required') && productoForm.get('categoria')?.touched">
+        <span>La categoria es <strong>obligatoria</strong></span>
+    </div>
+    <input class="controls" type="text" formControlName="peso" placeholder="Ingrese Pesaje">
+    <div class="text-danger"
+        *ngIf="productoForm.get('peso')?.hasError('required') && productoForm.get('peso')?.touched">
+        <span>El peso del producto es <strong>obligatorio</strong></span>
+    </div>
+    <input class="controls" type="number" formControlName="stock" placeholder="Ingrese Stock">
+    <div class="text-danger"
+        *ngIf="productoForm.get('stock')?.hasError('required') && productoForm.get('stock')?.touched">
+        <span>El stock del producto es <strong>obligatorio</strong></span>
+    </div>
+    <input class="controls" type="text" formControlName="precio" placeholder="Ingrese Precio">
+    <div class="text-danger"
+        *ngIf="productoForm.get('precio')?.hasError('required') && productoForm.get('precio')?.touched">
+        <span>El precio del producto es <strong>obligatorio</strong></span>
+    </div>
+    <label>Sabores</label><br>
+    <div *ngFor="let sabor of saboresList">
+        <input (click)="agregarSabor(sabor)" [checked]="check" type="checkbox" [value]="sabor"> <label class="ml-3" [id]="sabor">{{ sabor }}</label>
+    </div>
+    <textarea class="controls" cols="29" rows="5" formControlName="descripcion" placeholder="Ingrese una descripcion"></textarea>
+    <div class="text-danger"
+        *ngIf="productoForm.get('descripcion')?.hasError('required') && productoForm.get('descripcion')?.touched">
+        <span>La descripcion del producto es <strong>obligatorio</strong></span>
+    </div>
+    <textarea class="controls" cols="29" rows="5" formControlName="instrucciones" placeholder="Ingrese las instrucciones"></textarea>
+    <div class="text-danger"
+        *ngIf="productoForm.get('instrucciones')?.hasError('required') && productoForm.get('instrucciones')?.touched">
+        <span>Las instrucciones del producto es <strong>obligatorio</strong></span>
+    </div>
+    <button routerLink="/admin/products" class="btn btn-secondary">VOLVER</button>
+    <button type="submit" [disabled]="productoForm.invalid" class="btn btn-success ml-3">ACEPTAR</button>
+</form>
+

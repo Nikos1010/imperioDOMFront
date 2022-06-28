@@ -1,0 +1,43 @@
+<div *ngFor="let prod of producto">
+    <header *ngIf="id" class="img-header" [ngStyle]="{ 'background-image': 'url(assets/productos/'+ prod.imagen +'.jpeg)' }"
+        class="rk-portfolio-cover  item-inside-1">
+        <div class="item-inside__meta">
+            <h1 class="ae-u-bolder rk-portfolio-title cl-wh">{{ prod.nombre }}</h1>
+            <p class="ae-theta rk-portfolio-category cl-wh">{{ prod.categoria }}</p>
+            <p class="ae-theta rk-portfolio-category cl-wh">$ {{ prod.precio }}</p>
+        </div>
+    </header>
+    <div *ngIf="id" class="ae-container-fluid ae-container-fluid--inner rk-portfolio--inner">
+        <div class="ae-grid ae-grid--collapse au-xs-ptp-1">
+            <div class="ae-grid__item item-lg-5 au-lg-ptp-1">
+                <h4 class="ae-u-bolder">Descripcion</h4>
+                <p class="ae-eta">{{ prod.descripcion }}</p>
+            </div>
+            <div class="ae-grid__item item-lg-6 item-lg--offset-1">
+                <img src="assets/productos/{{prod.imagen}}.jpeg" alt="{{prod.nombre}}">
+            </div>
+        </div>
+        <div class="ae-grid ae-grid--collapse">
+            <div class="ae-grid__item item-lg-6">
+                <img src="assets/productos/{{prod.imagen}}.jpeg" alt="Urku Portfolio">
+            </div>
+            <div class="ae-grid__item item-lg-5 item-lg--offset-1 au-lg-ptp-1">
+                <h4 class="ae-u-bolder">Instrucciones De Uso</h4>
+                <p class="ae-eta">{{ prod.instrucciones }}</p>
+            </div>
+        </div>
+        <div class="ae-grid ae-grid--collapse au-xs-ptp-1 au-xs-pbp-1">
+            <div class="ae-grid__item item-lg-8 item-lg--offset-2">
+                <h4 class="ae-u-bolder">Informacion del producto</h4>
+                <p class="ae-eta">{{ prod.descripcion }}</p>
+                <p class="ae-eta">Peso: ${{ prod.peso }}</p>
+                <p class="ae-eta">Precio: ${{ prod.precio }}</p>
+                <p class="ae-eta">Sabores: </p>
+            </div>
+            <div class="ae-grid__item item-lg-8 item-lg--offset-2">
+                <div *ngFor="let sabor of prod.sabores" class="ae-grid__item--alt8 item-lg-6">
+                    <span class="ae-u-boldest">- {{ sabor }}</span>
+                </div>
+            </div>
+        </div>
+    </div>

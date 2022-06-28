@@ -1,0 +1,38 @@
+
+<div class="ae-grid au-xs-ta-center au-mb-4">
+    <div *ngFor="let persona of _infoService.equipo" class="ae-grid__item item-lg-4 ae-kappa au-mb-3">
+        <img [src]="persona.url" alt="" class="au-mb-3">
+        <h5 class="ae-u-bolder au-mt-2">{{ persona.nombre }}</h5>
+        <p class="ae-u-bolder au-mb-3">{{ persona.subtitulo }}</p>
+        <p class="au-lg-ta-left au-mb-3 au-pl-4 au-pr-4">{{ persona.frase }}</p>
+        <a target="_blank" href="https://twitter.com/{{ persona.twitter }}" class="ae-u-bolder au-underline">{{ persona.twitter }}</a>
+    </div>
+</div>
+<div class="ae-grid au-pt-2">
+    <div class="ae-grid__item item-lg-8 item-lg--offset-2">
+        <h4 class="ae-u-bolder">Conoce más sobre Nosotros</h4>
+        <p>Contamos con una amplia gama de productos y trabajamos con los laboratorios mas conocidos de Colombia, para proveer la
+        mejor calidad a los clientes que confian en nosotros.</p>
+        <p>En nuestra experencia hemos aprendido a brindar los servicios necesarios para cada uno de nuestros clientes, estamos
+        ubicados en la ciudad de Ibagué y esperamos serte de mucha ayuda.</p>
+    </div>
+</div>
+<div class="ae-grid ae-grid--alt au-xs-ptp-1">
+    <div *ngFor="let nos of _infoService.nosotros" class="ae-grid__item--alt item-lg-4">
+        <img src="assets/img/nosotros/{{ nos.img }}.svg" alt="" class="au-mb-3" width="400" height="400">
+        <h6 class="ae-u-boldest">{{ nos.titulo }}</h6>
+        <p class="au-lh-3">{{ nos.descripcion }}</p>
+    </div>
+</div>
+<div class="ae-container-fluid ae-container-fluid--inner rk-main">
+    <p class="au-flex au-pt-4 group-buttons">
+        <a routerLink="home" class="au-mt-4 arrow-button arrow-button--right arrow-button--out">
+            Productos
+            <span class="arrow-cont">
+                <svg>
+                    <use xlink:href="assets/img/symbols.svg#arrow"></use>
+                </svg>
+            </span>
+        </a>
+    </p>
+</div>
